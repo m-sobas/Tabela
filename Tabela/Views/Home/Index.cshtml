@@ -45,14 +45,13 @@
                                     <input type="number" 
                                            name="temp.Queries[@i].Id"
                                            value="@item.Id"
-                                           hidden
-                                           />
+                                           hidden />
                                 </td>
-                                <td class="text-start px-4">Tabela @i</td>
+                                <td class="text-start px-4">Tabela @(i+1)</td>
                                 <td>
                                     <input type="radio"
                                            name="temp.Queries[@i].Radio" 
-                                           @(item.Radio == true ? "checked" : "")
+                                           @(item.Radio ? "checked" : "")
                                            value=true
                                            required 
                                            class="form-check-input" />
@@ -60,7 +59,7 @@
                                 <td>
                                     <input type="radio"
                                            name="temp.Queries[@i].Radio" 
-                                           @(item.Radio == true ? "" : "checked")
+                                           @(item.Radio ? "" : "checked")
                                            value=false
                                            required 
                                            class="form-check-input" />                                     
