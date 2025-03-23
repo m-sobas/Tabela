@@ -3,7 +3,7 @@
 
 @{
     ViewData["Title"] = "Home Page";
-    var i = 1;
+    var i = 0;
 }
 
 <form class="form-control bg-light border-dark p-5" method="post" action="/Home/SendForm" enctype="multipart/form-data">
@@ -11,14 +11,14 @@
         <div class="row mb-2">
             <div class="col-12">
                 <span>Nazwa:</span>
-                <input type="text" name="Name" value="@Model.Name" class="form-control" aria-label="Area" />
+                <input type="text" name="temp.TemplateName" value="@Model.TemplateName" class="form-control" aria-label="Area" />
             </div>
         </div>
 
         <div class="row d-flex mb-5">
             <div class="col-4">
                 <span>Data:</span>
-                <input type="datetime" name="DateTime" value="@Model.DateTime" class="form-control" aria-label="DateTimeNow" />
+                <input type="datetime" name="temp.TemplateDateTime" value="@Model.TemplateDateTime" class="form-control" aria-label="DateTimeNow" />
             </div>
         </div>
 
@@ -40,31 +40,32 @@
                         @foreach(var item in Model.Queries)
                         {
                             <tr class="p-0">
-                                <td>@i</td>
+                                <td>@(i+1)</td>
                                 <td>
                                     <input type="number" 
-                                           name="@item.Id"
+                                           name="temp.Queries[@i].Id"
                                            value="@item.Id"
-                                           hidden />
+                                           hidden
+                                           />
                                 </td>
                                 <td class="text-start px-4">Tabela @i</td>
                                 <td>
-                                    <input type="radio" 
-                                           name="Radio + @i" 
+                                    <input type="radio"
+                                           name="temp.Queries[@i].Radio" 
                                            @(item.Radio == true ? "checked" : "") 
                                            required 
                                            class="form-check-input" />
                                 </td>
                                 <td>
-                                    <input type="radio" 
-                                           name="Radio + @i" 
+                                    <input type="radio"
+                                           name="temp.Queries[@i].Radio" 
                                            @(item.Radio == true ? "" : "checked") 
                                            required 
                                            class="form-check-input" />                                     
                                 </td>
                                 <td>
-                                    <input type="number" 
-                                           name="Counter"
+                                    <input type="number"
+                                           name="temp.Queries[@i].Counter"
                                            value="@item.Counter"
                                            min="0" 
                                            class="form-control text-center border-0 bg-transparent" />
@@ -72,7 +73,7 @@
                                 <td class="p-2">
                                     <a href="#" class="uploadLink">Dodaj zdjęcie</a>
                                     <input type="file" 
-                                           name="File" 
+                                           name="temp.Queries[@i].File" 
                                            class="fileInput" 
                                            hidden />
                                 </td>

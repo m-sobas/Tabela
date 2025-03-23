@@ -18,26 +18,26 @@ public class HomeController : Controller
     {
         var vm = new TemplateViewModel
         {
-            Id = 1,
-            Name = "Szablon Nr 1",
-            DateTime = DateTime.Now,
-            Queries = new List<Query>
+            TemplateId = 1,
+            TemplateName = "Szablon Nr 1",
+            TemplateDateTime = DateTime.Now,
+            Queries = new List<QueryViewModel>
             {
-                new Query
+                new QueryViewModel
                 {
                     Id = 11,
                     Radio = true,
                     Counter = null,
                     File = null
                 },
-                new Query
+                new QueryViewModel
                 {
                     Id = 12,
                     Radio = false,
                     Counter = 10,
                     File = null
                 },
-                new Query
+                new QueryViewModel
                 {
                     Id = 13,
                     Radio = true,
@@ -47,13 +47,46 @@ public class HomeController : Controller
             }
         };
 
+
+
+        //var vm = new TemplateViewModel
+        //{
+        //    Id = 1,
+        //    Name = "Szablon Nr 1",
+        //    DateTime = DateTime.Now,
+        //    Queries = new List<Query>
+        //    {
+        //        new Query
+        //        {
+        //            Id = 11,
+        //            Radio = true,
+        //            Counter = null,
+        //            File = null
+        //        },
+        //        new Query
+        //        {
+        //            Id = 12,
+        //            Radio = false,
+        //            Counter = 10,
+        //            File = null
+        //        },
+        //        new Query
+        //        {
+        //            Id = 13,
+        //            Radio = true,
+        //            Counter = 20,
+        //            File = null
+        //        }
+        //    }
+        //};
+
         return View(vm);
     }
 
     [HttpPost]
-    public IActionResult SendForm(TemplateViewModel template)
+    public IActionResult SendForm(TemplateViewModel temp)
     {
-        return Json(new { success = true, message = "Dane zosta³y zapisane", data = template });
+        return Json(new { success = true, message = "Dane zosta³y zapisane", data = temp });
     }
 
     public IActionResult Privacy()
