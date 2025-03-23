@@ -1,5 +1,9 @@
-﻿@{
+﻿@using Tabela.Models.ViewModels
+@model TemplateViewModel
+
+@{
     ViewData["Title"] = "Home Page";
+    var i = 1;
 }
 
 <form class="form-control bg-light border-dark p-5" method="post" action="/Home/SendForm" enctype="multipart/form-data">
@@ -7,14 +11,14 @@
         <div class="row mb-2">
             <div class="col-12">
                 <span>Nazwa:</span>
-                <input type="text" name="Name" class="form-control" aria-label="Area" />
+                <input type="text" name="Name" value="@Model.Name" class="form-control" aria-label="Area" />
             </div>
         </div>
 
         <div class="row d-flex mb-5">
             <div class="col-4">
                 <span>Data:</span>
-                <input type="datetime" name="DateTime" class="form-control" aria-label="DateTimeNow" />
+                <input type="datetime" name="DateTime" value="@Model.DateTime" class="form-control" aria-label="DateTimeNow" />
             </div>
         </div>
 
@@ -33,20 +37,48 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @for (int i = 0; i < 3; i++)
+                        @foreach(var item in Model.Queries)
                         {
                             <tr class="p-0">
-                                <td>@(i+1)</td>
-                                <td></td>
-                                <td class="text-start px-4">Treść @(i+1)</td>
-                                <td><input type="radio" name="Radios[@i]" value="ON" id="radio1" required class="form-check-input" /></td>
-                                <td><input type="radio" name="Radios[@i]" value="OFF" id="radio2" required class="form-check-input" /></td>
-                                <td><input type="number" name="Counters[]" min="0" class="form-control text-center border-0 bg-transparent" /></td>
+                                <td>@i</td>
+                                <td>
+                                    <input type="number" 
+                                           name="@item.Id"
+                                           value="@item.Id"
+                                           hidden />
+                                </td>
+                                <td class="text-start px-4">Tabela @i</td>
+                                <td>
+                                    <input type="radio" 
+                                           name="Radio + @i" 
+                                           @(item.Radio == true ? "checked" : "") 
+                                           required 
+                                           class="form-check-input" />
+                                </td>
+                                <td>
+                                    <input type="radio" 
+                                           name="Radio + @i" 
+                                           @(item.Radio == true ? "" : "checked") 
+                                           required 
+                                           class="form-check-input" />                                     
+                                </td>
+                                <td>
+                                    <input type="number" 
+                                           name="Counter"
+                                           value="@item.Counter"
+                                           min="0" 
+                                           class="form-control text-center border-0 bg-transparent" />
+                                </td>
                                 <td class="p-2">
                                     <a href="#" class="uploadLink">Dodaj zdjęcie</a>
-                                    <input type="file" name="Files" class="fileInput" hidden />
+                                    <input type="file" 
+                                           name="File" 
+                                           class="fileInput" 
+                                           hidden />
                                 </td>
                             </tr>
+
+                            i += 1;
                         }
                    </tbody>
                 </table>
