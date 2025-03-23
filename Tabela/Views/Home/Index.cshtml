@@ -52,14 +52,16 @@
                                 <td>
                                     <input type="radio"
                                            name="temp.Queries[@i].Radio" 
-                                           @(item.Radio == true ? "checked" : "") 
+                                           @(item.Radio == true ? "checked" : "")
+                                           value=true
                                            required 
                                            class="form-check-input" />
                                 </td>
                                 <td>
                                     <input type="radio"
                                            name="temp.Queries[@i].Radio" 
-                                           @(item.Radio == true ? "" : "checked") 
+                                           @(item.Radio == true ? "" : "checked")
+                                           value=false
                                            required 
                                            class="form-check-input" />                                     
                                 </td>
